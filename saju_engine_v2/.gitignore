@@ -1,0 +1,19 @@
+# ===== 빌드 산출물 (스크립트로 재생성 가능) =====
+saju_full.db            # build_full_db.py 로 생성
+saju_web.html           # build_webapp.py 로 생성
+saju_viewer.html        # build_viewer.py 로 생성 (구버전 뷰어)
+mingli_dataset.csv      # extract_mingli.py 로 생성
+mingli_verify*.csv      # refine_mingli.py 로 생성
+
+# ===== 임시·캐시 =====
+ziDXc5PI                # 이전 백업 zip 임시 파일
+*.bak
+__pycache__/
+*.pyc
+/tmp/
+*.zip
+
+# ===== 비고 =====
+# saju_classics.db (원본 DB), translations_*.json, refs_table.json,
+# jieqi_table.json, lunar_table.json, mingli_dataset.json 은
+# 소스 자산이므로 git 에 포함합니다.

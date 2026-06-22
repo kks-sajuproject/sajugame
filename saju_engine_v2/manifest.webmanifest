@@ -1,0 +1,12 @@
+{
+  "name": "사주 분석기 · 命理",
+  "short_name": "사주분석",
+  "description": "고전 명리 기반 만세력·격국·운세 분석",
+  "start_url": "./saju_web.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#3a5bd9",
+  "lang": "ko"
+}
