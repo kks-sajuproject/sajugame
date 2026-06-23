@@ -871,10 +871,20 @@ function renderLane(which,dir){
   html+=sumCardEl(arr[idx],'main',idx);
   if(n>=2&&R!==L)html+=sumCardEl(arr[R],'side',R);
   stg.innerHTML=html;
-  if(dir){stg.style.animation='none';void stg.offsetWidth;stg.style.animation=(dir>0?'sumNext':'sumPrev')+' .26s ease';}
+  if(dir){stg.style.animation='none';void stg.offsetWidth;stg.style.animation=(dir>0?'sumNext':'sumPrev')+' .36s cubic-bezier(.22,.61,.36,1)';}
   if(dots){let d='';for(let i=0;i<n;i++)d+='<i style="background:'+(i===idx?'#6a4ad0':'#d8d2c4')+'"></i>';dots.innerHTML=d;}
-  stg.querySelectorAll('.pcw').forEach(el=>{el.onclick=()=>{const i=+el.dataset.i;if(el.dataset.cls==='main'){openSumModal(which,i);}else{const cur=((SUMIDX[which]%n)+n)%n,dd=(i===((cur-1+n)%n))?-1:1;SUMIDX[which]=i;renderLane(which,dd);}};});
+  stg.querySelectorAll('.pcw').forEach(el=>{el.onclick=()=>{const i=+el.dataset.i;if(el.dataset.cls==='main'){sumZap(el,()=>openSumModal(which,i));}else{const cur=((SUMIDX[which]%n)+n)%n,dd=(i===((cur-1+n)%n))?-1:1;SUMIDX[which]=i;renderLane(which,dd);}};});
 }
+function sumZap(el,cb){
+  const stg=el&&el.closest('.carstg');if(!stg){cb&&cb();return;}
+  const r=el.getBoundingClientRect(),sr=stg.getBoundingClientRect();
+  const z=document.createElement('div');z.className='zapfx';
+  z.style.left=(r.left-sr.left)+'px';z.style.top=(r.top-sr.top)+'px';z.style.width=r.width+'px';z.style.height=r.height+'px';
+  z.innerHTML='<div class="zapglow"></div><svg viewBox="0 0 100 150" preserveAspectRatio="none" width="100%" height="100%" style="position:absolute;inset:0"><path d="M60 6 L33 72 L52 72 L40 144 L80 60 L58 60 Z" fill="#ffe34d" stroke="#ffb300" stroke-width="3" stroke-linejoin="round"/></svg>';
+  stg.appendChild(z);
+  setTimeout(function(){z.remove();cb&&cb();},360);
+}
+function secToggle(id,btn){const b=document.getElementById(id);if(!b)return;const hid=b.classList.toggle('hidden');if(btn){btn.textContent=hid?'▸':'▾';btn.setAttribute('aria-expanded',String(!hid));}}
 function sumNav(which,d){const n=(SUMCARDS[which]||[]).length;if(!n)return;SUMIDX[which]=((SUMIDX[which]+d)%n+n)%n;renderLane(which,d);}
 function openSumModal(which,i){const c=(SUMCARDS[which]||[])[i];if(!c)return;SUMIDX[which]=i;const col=SUMCOL[c.cat]||SUMCOL.mid;
   document.getElementById('sumModalBox').innerHTML=

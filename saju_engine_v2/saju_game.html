@@ -116,8 +116,19 @@ h1{font-size:20px;font-weight:700;margin:4px 0 2px;text-align:center}
 .pcshort{font-size:11px;color:#555;line-height:1.45;margin-top:2px}
 .cardots{display:flex;justify-content:center;gap:5px;padding:2px 0 9px}
 .cardots i{width:7px;height:7px;border-radius:50%;display:inline-block;transition:background .2s}
-@keyframes sumNext{from{opacity:.25;transform:translateX(26px)}to{opacity:1;transform:none}}
-@keyframes sumPrev{from{opacity:.25;transform:translateX(-26px)}to{opacity:1;transform:none}}
+@keyframes sumNext{0%{opacity:0;transform:translateX(40px) scale(.94)}60%{opacity:1}100%{opacity:1;transform:none}}
+@keyframes sumPrev{0%{opacity:0;transform:translateX(-40px) scale(.94)}60%{opacity:1}100%{opacity:1;transform:none}}
+.carstg{position:relative}
+.zapfx{position:absolute;pointer-events:none;z-index:7;animation:zapfx .5s ease-out forwards}
+@keyframes zapfx{0%{opacity:0;transform:scale(.5)}12%{opacity:1}26%{opacity:.15}42%{opacity:1}60%{opacity:.3}100%{opacity:0;transform:scale(1.2)}}
+.zapglow{position:absolute;inset:0;border-radius:12px;box-shadow:0 0 0 3px #ffd54a,0 0 18px 4px rgba(255,179,0,.7);animation:zapglow .5s ease-out forwards;pointer-events:none}
+@keyframes zapglow{0%{opacity:0}20%{opacity:1}100%{opacity:0}}
+.sechd{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.sechd .sectitle{flex:1;margin-top:0}
+.sectog{flex:0 0 auto;width:27px;height:27px;border:1px solid var(--bd);background:#fff;border-radius:8px;color:#666;font-size:13px;line-height:1;cursor:pointer;padding:0}
+.sectog:active{transform:scale(.9)}
+.stagetog{position:absolute;top:8px;right:8px;z-index:6;background:rgba(255,255,255,.85)}
+.secbody{overflow:hidden}
 #sumModalBox,#sumModalBox *{font-family:"Apple SD Gothic Neo","Malgun Gothic",sans-serif}
 #sumModalBox h3{font-size:15px;font-weight:700;margin:10px 0 4px}
 #sumModalBox .line{font-size:13.5px;line-height:1.75}
@@ -267,36 +278,43 @@ h1{font-size:20px;font-weight:700;margin:4px 0 2px;text-align:center}
     <svg id="fxRel" xmlns="http://www.w3.org/2000/svg"></svg>
     <svg id="fxSel" xmlns="http://www.w3.org/2000/svg"></svg>
     <div class="card">
-      <div class="sectitle">운(運) 선택 — 대운·세운·월운을 누르면 아래 캐릭터와 합·충이 갱신됩니다</div>
-      <div class="lrlabel">대운 (10년)</div><div class="lrow" id="daeRow"></div>
-      <div class="lrlabel">세운 (해운) <span id="seYearLab" style="font-weight:400"></span></div><div class="lrow" id="seRow"></div>
-      <div class="lrlabel">월운 (달운)</div><div class="lrow" id="wolRow"></div>
+      <div class="sechd"><div class="sectitle">운(運) 선택 — 대운·세운·월운을 누르면 아래 캐릭터와 합·충이 갱신됩니다</div><button class="sectog" onclick="secToggle('sb-luck',this)" aria-expanded="true" aria-label="접기/펼치기">▾</button></div>
+      <div class="secbody" id="sb-luck">
+        <div class="lrlabel">대운 (10년)</div><div class="lrow" id="daeRow"></div>
+        <div class="lrlabel">세운 (해운) <span id="seYearLab" style="font-weight:400"></span></div><div class="lrow" id="seRow"></div>
+        <div class="lrlabel">월운 (달운)</div><div class="lrow" id="wolRow"></div>
+      </div>
     </div>
 
     <div class="card">
-      <div class="sectitle">📋 이 시기 총평 — 무엇을 기대하고 무엇을 조심할까 (큰 사건은 빨강)</div>
-      <div id="summaryBox"><div class="infohint" style="padding:6px">대운·세운·월운을 선택하면 그 시기의 총평이 자동으로 나옵니다.</div></div>
+      <div class="sechd"><div class="sectitle">📋 이 시기 총평 — 무엇을 기대하고 무엇을 조심할까 (큰 사건은 빨강)</div><button class="sectog" onclick="secToggle('sb-sum',this)" aria-expanded="true" aria-label="접기/펼치기">▾</button></div>
+      <div class="secbody" id="sb-sum"><div id="summaryBox"><div class="infohint" style="padding:6px">대운·세운·월운을 선택하면 그 시기의 총평이 자동으로 나옵니다.</div></div></div>
     </div>
 
     <div class="stagewrap">
+      <button class="sectog stagetog" onclick="secToggle('sb-stage',this)" aria-expanded="true" aria-label="접기/펼치기">▾</button>
       <div class="stagettl">✦ 내 사주에 깃든 캐릭터 ✦</div>
-      <div class="stagecols">
-        <div class="stagecol"><div class="scolttl">원국 — 타고난 나</div><div class="scells" id="cellsOrig"></div></div>
-        <div class="stagedivider"></div>
-        <div class="stagecol"><div class="scolttl">운(運)으로 오는</div><div class="scells" id="cellsLuck"></div></div>
+      <div class="secbody" id="sb-stage">
+        <div class="stagecols">
+          <div class="stagecol"><div class="scolttl">원국 — 타고난 나</div><div class="scells" id="cellsOrig"></div></div>
+          <div class="stagedivider"></div>
+          <div class="stagecol"><div class="scolttl">운(運)으로 오는</div><div class="scells" id="cellsLuck"></div></div>
+        </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="sectitle">사주 원국 + 운 · 궁(宮) — 글자 옆 캐릭터가 위 캐릭터 클릭 시 표정·테두리로 반응</div>
-      <div class="pillars" id="pillars"></div>
-      <div class="legend">
-        <span><i class="dot" style="background:#e0b400"></i>길</span>
-        <span><i class="dot" style="background:#d98a2a"></i>양면</span>
-        <span><i class="dot" style="background:#d23b2a"></i>흉</span>
+      <div class="sechd"><div class="sectitle">사주 원국 + 운 · 궁(宮) — 글자 옆 캐릭터가 위 캐릭터 클릭 시 표정·테두리로 반응</div><button class="sectog" onclick="secToggle('sb-gung',this)" aria-expanded="true" aria-label="접기/펼치기">▾</button></div>
+      <div class="secbody" id="sb-gung">
+        <div class="pillars" id="pillars"></div>
+        <div class="legend">
+          <span><i class="dot" style="background:#e0b400"></i>길</span>
+          <span><i class="dot" style="background:#d98a2a"></i>양면</span>
+          <span><i class="dot" style="background:#d23b2a"></i>흉</span>
+        </div>
+        <div class="sectitle" id="relTitle" style="margin-top:16px">합·충·형·파·해 — 운을 선택하면 표시됩니다</div>
+        <div id="relList"><div class="infohint" style="padding:8px">운(대운·세운·월운)을 선택하면 합·충 관계가 여기에 표시됩니다.</div></div>
       </div>
-      <div class="sectitle" id="relTitle" style="margin-top:16px">합·충·형·파·해 — 운을 선택하면 표시됩니다</div>
-      <div id="relList"><div class="infohint" style="padding:8px">운(대운·세운·월운)을 선택하면 합·충 관계가 여기에 표시됩니다.</div></div>
     </div>
 
     <div id="info"><div class="infohint">위 캐릭터(또는 합·충 칩)를 누르면 상세 설명이 여기에 나타납니다.</div></div>
@@ -1529,10 +1547,20 @@ function renderLane(which,dir){
   html+=sumCardEl(arr[idx],'main',idx);
   if(n>=2&&R!==L)html+=sumCardEl(arr[R],'side',R);
   stg.innerHTML=html;
-  if(dir){stg.style.animation='none';void stg.offsetWidth;stg.style.animation=(dir>0?'sumNext':'sumPrev')+' .26s ease';}
+  if(dir){stg.style.animation='none';void stg.offsetWidth;stg.style.animation=(dir>0?'sumNext':'sumPrev')+' .36s cubic-bezier(.22,.61,.36,1)';}
   if(dots){let d='';for(let i=0;i<n;i++)d+='<i style="background:'+(i===idx?'#6a4ad0':'#d8d2c4')+'"></i>';dots.innerHTML=d;}
-  stg.querySelectorAll('.pcw').forEach(el=>{el.onclick=()=>{const i=+el.dataset.i;if(el.dataset.cls==='main'){openSumModal(which,i);}else{const cur=((SUMIDX[which]%n)+n)%n,dd=(i===((cur-1+n)%n))?-1:1;SUMIDX[which]=i;renderLane(which,dd);}};});
+  stg.querySelectorAll('.pcw').forEach(el=>{el.onclick=()=>{const i=+el.dataset.i;if(el.dataset.cls==='main'){sumZap(el,()=>openSumModal(which,i));}else{const cur=((SUMIDX[which]%n)+n)%n,dd=(i===((cur-1+n)%n))?-1:1;SUMIDX[which]=i;renderLane(which,dd);}};});
 }
+function sumZap(el,cb){
+  const stg=el&&el.closest('.carstg');if(!stg){cb&&cb();return;}
+  const r=el.getBoundingClientRect(),sr=stg.getBoundingClientRect();
+  const z=document.createElement('div');z.className='zapfx';
+  z.style.left=(r.left-sr.left)+'px';z.style.top=(r.top-sr.top)+'px';z.style.width=r.width+'px';z.style.height=r.height+'px';
+  z.innerHTML='<div class="zapglow"></div><svg viewBox="0 0 100 150" preserveAspectRatio="none" width="100%" height="100%" style="position:absolute;inset:0"><path d="M60 6 L33 72 L52 72 L40 144 L80 60 L58 60 Z" fill="#ffe34d" stroke="#ffb300" stroke-width="3" stroke-linejoin="round"/></svg>';
+  stg.appendChild(z);
+  setTimeout(function(){z.remove();cb&&cb();},360);
+}
+function secToggle(id,btn){const b=document.getElementById(id);if(!b)return;const hid=b.classList.toggle('hidden');if(btn){btn.textContent=hid?'▸':'▾';btn.setAttribute('aria-expanded',String(!hid));}}
 function sumNav(which,d){const n=(SUMCARDS[which]||[]).length;if(!n)return;SUMIDX[which]=((SUMIDX[which]+d)%n+n)%n;renderLane(which,d);}
 function openSumModal(which,i){const c=(SUMCARDS[which]||[])[i];if(!c)return;SUMIDX[which]=i;const col=SUMCOL[c.cat]||SUMCOL.mid;
   document.getElementById('sumModalBox').innerHTML=
