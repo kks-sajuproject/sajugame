@@ -132,7 +132,49 @@ h1{font-size:20px;font-weight:700;margin:4px 0 2px;text-align:center}
 .dgfull{grid-column:1/3;display:none;margin-top:8px;border-top:1px dashed var(--bd);padding-top:8px}
 @media(min-width:520px){.dggrid{grid-template-columns:1fr 1fr}}
 .bigev{color:#d23b2a;font-weight:700}
-.sumgrp{font-size:12.5px;font-weight:700;color:#6a4ad0;margin:11px 0 4px}
+.sumgrp{font-size:12.5px;font-weight:700;color:#6a4ad0;margin:14px 0 3px}
+.sumdesc{font-size:12px;color:#666;line-height:1.6;margin:0 0 6px;padding:6px 9px;background:#f6f4fb;border-radius:8px}
+.sumlane{border:1px solid var(--bd);border-radius:14px;overflow:hidden;margin:11px 0;background:#fff}
+.lanehd{padding:8px 12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:2px}
+.lanehd .lt{font-size:15px;font-weight:700}
+.lanehd .lg{font-size:18px;font-weight:700;margin-left:6px}
+.lanehd .lp{font-size:11px;width:100%}
+.carow{display:flex;align-items:center;gap:4px;padding:9px 4px 4px}
+.carow .nav{flex:0 0 auto;width:32px;height:32px;border-radius:50%;border:1px solid var(--bd);background:#fff;font-size:20px;line-height:1;cursor:pointer;color:#666;padding:0}
+.carow .nav:active{transform:scale(.92)}
+.carstg{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;min-height:214px;overflow:hidden}
+.pcw{flex:0 0 auto;cursor:pointer;transition:opacity .2s}
+.pcd{border-radius:12px;overflow:hidden;background:#fff}
+.pchd{padding:5px 8px;display:flex;align-items:center;justify-content:space-between;gap:4px}
+.pcnm{font-weight:700;line-height:1.25}
+.pcst{font-size:10px;letter-spacing:1px;color:#e0a800;flex:0 0 auto}
+.pcemb{display:flex;align-items:center;justify-content:center}
+.pcemb svg{width:100%;height:100%;display:block}
+.pcft{padding:5px 8px 7px}
+.pctype{font-size:10px;font-weight:700}
+.pcshort{font-size:11px;color:#555;line-height:1.45;margin-top:2px}
+.cardots{display:flex;justify-content:center;gap:5px;padding:2px 0 9px}
+.cardots i{width:7px;height:7px;border-radius:50%;display:inline-block;transition:background .2s}
+@keyframes sumNext{0%{opacity:0;transform:translateX(40px) scale(.94)}60%{opacity:1}100%{opacity:1;transform:none}}
+@keyframes sumPrev{0%{opacity:0;transform:translateX(-40px) scale(.94)}60%{opacity:1}100%{opacity:1;transform:none}}
+.carstg{position:relative}
+.zapfx{position:absolute;pointer-events:none;z-index:7;animation:zapfx .5s ease-out forwards}
+@keyframes zapfx{0%{opacity:0;transform:scale(.5)}12%{opacity:1}26%{opacity:.15}42%{opacity:1}60%{opacity:.3}100%{opacity:0;transform:scale(1.2)}}
+.zapglow{position:absolute;inset:0;border-radius:12px;box-shadow:0 0 0 3px #ffd54a,0 0 18px 4px rgba(255,179,0,.7);animation:zapglow .5s ease-out forwards;pointer-events:none}
+@keyframes zapglow{0%{opacity:0}20%{opacity:1}100%{opacity:0}}
+.sechd{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
+.sechd .sectitle{flex:1;margin-top:0}
+.sectog{flex:0 0 auto;width:27px;height:27px;border:1px solid var(--bd);background:#fff;border-radius:8px;color:#666;font-size:13px;line-height:1;cursor:pointer;padding:0}
+.sectog:active{transform:scale(.9)}
+.stagetog{position:absolute;top:8px;right:8px;z-index:6;background:rgba(255,255,255,.85)}
+.secbody{overflow:hidden}
+#sumModalBox,#sumModalBox *{font-family:"Apple SD Gothic Neo","Malgun Gothic",sans-serif}
+#sumModalBox h3{font-size:15px;font-weight:700;margin:10px 0 4px}
+#sumModalBox .line{font-size:13.5px;line-height:1.75}
+#sumModalBox .meta{font-size:12px;color:var(--sub)}
+#sumModalBox .reftitle{font-size:13px}
+#sumModalBox .refhead{font-size:12.5px}
+#sumModalBox .refsnip,#sumModalBox .reffull{font-size:12.5px;line-height:1.7}
 .sumleg{font-size:11.5px;color:var(--sub);margin:2px 0 8px}
 .refsec{margin-top:12px;border-top:1px dashed var(--bd);padding-top:10px}
 .reftitle{font-size:13px;font-weight:700;margin-bottom:6px}
@@ -275,36 +317,43 @@ h1{font-size:20px;font-weight:700;margin:4px 0 2px;text-align:center}
     <svg id="fxRel" xmlns="http://www.w3.org/2000/svg"></svg>
     <svg id="fxSel" xmlns="http://www.w3.org/2000/svg"></svg>
     <div class="card">
-      <div class="sectitle">운(運) 선택 — 대운·세운·월운을 누르면 아래 캐릭터와 합·충이 갱신됩니다</div>
-      <div class="lrlabel">대운 (10년)</div><div class="lrow" id="daeRow"></div>
-      <div class="lrlabel">세운 (해운) <span id="seYearLab" style="font-weight:400"></span></div><div class="lrow" id="seRow"></div>
-      <div class="lrlabel">월운 (달운)</div><div class="lrow" id="wolRow"></div>
+      <div class="sechd"><div class="sectitle">운(運) 선택 — 대운·세운·월운을 누르면 아래 캐릭터와 합·충이 갱신됩니다</div><button class="sectog" onclick="secToggle('sb-luck',this)" aria-expanded="true" aria-label="접기/펼치기">▾</button></div>
+      <div class="secbody" id="sb-luck">
+        <div class="lrlabel">대운 (10년)</div><div class="lrow" id="daeRow"></div>
+        <div class="lrlabel">세운 (해운) <span id="seYearLab" style="font-weight:400"></span></div><div class="lrow" id="seRow"></div>
+        <div class="lrlabel">월운 (달운)</div><div class="lrow" id="wolRow"></div>
+      </div>
     </div>
 
     <div class="card">
-      <div class="sectitle">📋 이 시기 총평 — 무엇을 기대하고 무엇을 조심할까 (큰 사건은 빨강)</div>
-      <div id="summaryBox"><div class="infohint" style="padding:6px">대운·세운·월운을 선택하면 그 시기의 총평이 자동으로 나옵니다.</div></div>
+      <div class="sechd"><div class="sectitle">📋 이 시기 총평 — 무엇을 기대하고 무엇을 조심할까 (큰 사건은 빨강)</div><button class="sectog" onclick="secToggle('sb-sum',this)" aria-expanded="true" aria-label="접기/펼치기">▾</button></div>
+      <div class="secbody" id="sb-sum"><div id="summaryBox"><div class="infohint" style="padding:6px">대운·세운·월운을 선택하면 그 시기의 총평이 자동으로 나옵니다.</div></div></div>
     </div>
 
     <div class="stagewrap">
+      <button class="sectog stagetog" onclick="secToggle('sb-stage',this)" aria-expanded="true" aria-label="접기/펼치기">▾</button>
       <div class="stagettl">✦ 내 사주에 깃든 캐릭터 ✦</div>
-      <div class="stagecols">
-        <div class="stagecol"><div class="scolttl">원국 — 타고난 나</div><div class="scells" id="cellsOrig"></div></div>
-        <div class="stagedivider"></div>
-        <div class="stagecol"><div class="scolttl">운(運)으로 오는</div><div class="scells" id="cellsLuck"></div></div>
+      <div class="secbody" id="sb-stage">
+        <div class="stagecols">
+          <div class="stagecol"><div class="scolttl">원국 — 타고난 나</div><div class="scells" id="cellsOrig"></div></div>
+          <div class="stagedivider"></div>
+          <div class="stagecol"><div class="scolttl">운(運)으로 오는</div><div class="scells" id="cellsLuck"></div></div>
+        </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="sectitle">사주 원국 + 운 · 궁(宮) — 글자 옆 캐릭터가 위 캐릭터 클릭 시 표정·테두리로 반응</div>
-      <div class="pillars" id="pillars"></div>
-      <div class="legend">
-        <span><i class="dot" style="background:#e0b400"></i>길</span>
-        <span><i class="dot" style="background:#d98a2a"></i>양면</span>
-        <span><i class="dot" style="background:#d23b2a"></i>흉</span>
+      <div class="sechd"><div class="sectitle">사주 원국 + 운 · 궁(宮) — 글자 옆 캐릭터가 위 캐릭터 클릭 시 표정·테두리로 반응</div><button class="sectog" onclick="secToggle('sb-gung',this)" aria-expanded="true" aria-label="접기/펼치기">▾</button></div>
+      <div class="secbody" id="sb-gung">
+        <div class="pillars" id="pillars"></div>
+        <div class="legend">
+          <span><i class="dot" style="background:#e0b400"></i>길</span>
+          <span><i class="dot" style="background:#d98a2a"></i>양면</span>
+          <span><i class="dot" style="background:#d23b2a"></i>흉</span>
+        </div>
+        <div class="sectitle" id="relTitle" style="margin-top:16px">합·충·형·파·해 — 운을 선택하면 표시됩니다</div>
+        <div id="relList"><div class="infohint" style="padding:8px">운(대운·세운·월운)을 선택하면 합·충 관계가 여기에 표시됩니다.</div></div>
       </div>
-      <div class="sectitle" id="relTitle" style="margin-top:16px">합·충·형·파·해 — 운을 선택하면 표시됩니다</div>
-      <div id="relList"><div class="infohint" style="padding:8px">운(대운·세운·월운)을 선택하면 합·충 관계가 여기에 표시됩니다.</div></div>
     </div>
 
     <div id="info"><div class="infohint">위 캐릭터(또는 합·충 칩)를 누르면 상세 설명이 여기에 나타납니다.</div></div>
@@ -313,6 +362,10 @@ h1{font-size:20px;font-weight:700;margin:4px 0 2px;text-align:center}
       <div class="sectitle">📖 내 신살 도감 — 지금 내 사주에 뜬 캐릭터 모아보기</div>
       <div id="dogamBox"><div class="infohint" style="padding:8px">사주를 소환하면 원국과 선택한 운에 뜬 캐릭터가 도감으로 모입니다.</div></div>
     </div>
+  </div>
+
+  <div id="sumModal" class="modalov hidden" onclick="if(event.target===this)closeSumModal()">
+    <div class="modalbox" id="sumModalBox"></div>
   </div>
 </div>
 
@@ -493,7 +546,18 @@ function gtype(k,which){
 }
 const SUBJW={};
 const SIPSIN_DOM={정재:'재물·아내',편재:'사업·이성·부친',정관:'직장·명예·남편',편관:'압박·도전·질병',정인:'문서·학업·모친',편인:'기술·종교·눈치',식신:'표현·먹을복·자녀',상관:'재능·구설·자녀',비견:'동료·독립',겁재:'경쟁·손재'};
-const SUBJECT_PLAIN={사회상:'집안·사회적으로 드러난 나의 이미지·명예',뿌리:'조상·고향·어린 시절의 기반',가치관:'배움·원칙·직업관·이상',가정기반:'가정·부모 관계·직업의 기반',내면:'의식 속의 나(생각·자아)',배우자:'현실의 나·배우자(결혼·가정)',미래자녀:'미래·자녀에 대한 생각·말년 계획',실제자녀:'실제 자녀와 말년의 환경'};
+const SUBJECT_PLAIN={사회상:'남에게 보이는 나(직업·명예)',뿌리:'어린 시절과 집안(조상·고향)',가치관:'배움과 직업관(원칙·이상)',가정기반:'가정과 부모(생활 기반)',내면:'속마음(생각·자아)',배우자:'나 자신과 배우자(결혼)',미래자녀:'말년과 자녀 계획',실제자녀:'자녀와 노년'};
+const GUNG_SHORT={사회상:'사회적 나·명예',뿌리:'어린시절·집안',가치관:'배움·직업관',가정기반:'가정·부모',내면:'속마음',배우자:'나·배우자',미래자녀:'말년·자녀',실제자녀:'자녀·노년'};
+const GUNG_EXPLAIN={
+ 사회상:'집 밖에서 남들에게 보이는 나의 모습이에요. 직업·명예·평판처럼 사회에서 내가 어떤 위치에 있고 어떻게 비치는지를 뜻해요.',
+ 뿌리:'내가 자라온 바탕이에요. 조상과 고향, 집안 분위기, 그리고 어린 시절에 겪은 환경을 뜻해요.',
+ 가치관:'내가 무엇을 옳다고 믿고 어떻게 배우며 사는지예요. 공부·원칙·직업관·이상 같은 마음의 기준을 뜻해요.',
+ 가정기반:'나의 생활 터전이에요. 부모와의 관계, 가정의 분위기, 그리고 일·직업의 바탕을 뜻해요.',
+ 내면:'겉으로는 잘 안 보이는 내 속마음이에요. 평소의 생각·감정·자아처럼 나만 아는 내면 세계를 뜻해요.',
+ 배우자:'현실의 나 자신, 그리고 배우자예요. 결혼·연애·가정생활처럼 가장 가까운 사람과의 인연을 뜻해요.',
+ 미래자녀:'앞으로의 삶과 자녀에 대한 마음이에요. 미래 계획·노년의 모습·자녀에 대한 생각을 뜻해요.',
+ 실제자녀:'실제 자녀와 노년의 환경이에요. 아랫사람이나 자녀, 그리고 인생 후반의 생활을 뜻해요.'
+};
 const GUNG_PLACE={사회상:'사회적 이미지·명예 자리',뿌리:'조상·뿌리 자리',가치관:'가치관·직업관 자리',가정기반:'가정·직업 기반 자리',내면:'내면(생각)의 자리',배우자:'현실의 나·배우자 자리',미래자녀:'미래·자녀 자리',실제자녀:'실제 자녀·말년 자리'};
 const EVENT_BY_GUNG={
   배우자:{충:['결혼','이혼·별거','배우자 직장·건강 변화','이사·이동'],합:['결혼·새 인연','배우자와 협력'],형:['부부 갈등','배우자 수술수'],파:['관계 균열'],해:['소소한 불화']},
@@ -575,7 +639,7 @@ function luckPeriodLabel(lk){if(lk==='se')return (SELSE?SELSE.Y+'년':'그 해')
 function buildPlain(gi,sc){
   const sp=SIPSIN_PLAIN[gi.ss]||{label:gi.ss||'기운',desc:''};
   const osp=SIPSIN_PLAIN[gi.origSs]||{label:gi.origSs||'',desc:''};
-  const subj=SUBJECT_PLAIN[gi.gt]||gi.gt, place=GUNG_PLACE[gi.gt]||(subj+' 자리');
+  const subj=GUNG_SHORT[gi.gt]||SUBJECT_PLAIN[gi.gt]||gi.gt, place=GUNG_PLACE[gi.gt]||(subj+' 자리');
   const action=(gi.type.indexOf('합')>=0)?'합':gi.type;
   const rel=RELATION_PLAIN[action]||{label:gi.type,verb:gi.type,desc:''};
   const fav=sc>0?'좋은 쪽으로 풀릴 가능성이 큰':(sc<0?'조금 조심해야 할':'크고 작은');
@@ -585,7 +649,7 @@ function buildPlain(gi,sc){
   let h='<h3 style="margin-bottom:4px">'+period+'이 「'+subj+'」을(를) '+rel.label+'</h3>'
     +'<div class="meta">들어온 글자 <b>'+gi.luckChar+'</b>('+(gi.ss||'')+') · 건드려진 글자 <b>'+gi.origChar+'</b>('+(gi.origSs||'')+') · 작용 <b>'+rel.label+'</b>('+gi.type+')</div>'
     +'<p style="margin:7px 0;line-height:1.75">'+para+'</p>'
-    +L('① 어디에 영향이 올까요?',subj);
+    +L('① 어디에 영향이 올까요?','<b>'+subj+'</b> 자리예요.<br>'+(GUNG_EXPLAIN[gi.gt]||''));
   if(same)h+=L('② 어떤 기운이 작용하나요?','이 자리(「'+gi.origChar+'」)도, 들어온 기운(「'+gi.luckChar+'」)도 모두 <b>'+sp.label+'('+gi.ss+')</b>예요. 같은 기운이 겹쳐서 그 성질이 평소보다 훨씬 강하게 드러나요.<br>· '+sp.desc);
   else h+=L('② 그 자리의 원래 성격','「'+gi.origChar+'」('+(gi.origSs||'-')+') — '+osp.label+(osp.desc?': '+osp.desc:''))
         +L('③ 들어온 기운','「'+gi.luckChar+'」('+(gi.ss||'')+') — '+sp.label+': '+sp.desc);
@@ -757,39 +821,95 @@ const SS_LUCK={
 const BIG_EVENTS=['결혼','이혼','별거','이직','입사','퇴사','해고','이사','매매','부동산','연애','이성','금전','재물','빚','손재','손실','이별','사별','상실','스트레스','사고','수술','다침','출산','임신','승진','발탁','시험','자격증','합격','망신','구설','질병','건강','관재','송사','도난','사기'];
 const BIG_RE=new RegExp('('+BIG_EVENTS.join('|')+')','g');
 function hlBig(t){return t.replace(BIG_RE,'<span class="bigev">$1</span>');}
+const SUMCOL={good:['#c9a227','#fff8e6','#7a5b00','길'],bad:['#d23b2a','#fdeceb','#8a1f17','주의'],mid:['#888780','#f1efe8','#444441','중립']};
+const SIPSIN_EMB={정인:'문서운',편인:'재주운',정관:'직장운',편관:'압박운',정재:'재물운',편재:'사업운',식신:'표현운',상관:'끼·재능',비견:'경쟁운',겁재:'욕심운'};
+const REL_EMB={합:'만남',충:'충돌',형:'마찰',파:'깨짐',해:'방해'};
+function glyphEmblem(txt,color){
+  txt=String(txt);const fs=txt.length<=1?44:(txt.length===2?30:(txt.length===3?23:19));
+  return '<svg viewBox="0 0 96 96" width="96" height="96" xmlns="http://www.w3.org/2000/svg"><circle cx="48" cy="48" r="40" fill="#fbf7ee" stroke="'+color+'" stroke-width="3.5"/><text x="48" y="48" dominant-baseline="central" text-anchor="middle" font-size="'+fs+'" font-weight="700" fill="'+color+'">'+txt+'</text></svg>';}
+function sumStars(st){let s='';for(let i=0;i<Math.max(1,Math.min(3,st||1));i++)s+='★';return s;}
 function summaryItems(){
-  const se=[],dae=[],seen={},use=CUR.ua.use,avoid=CUR.ua.avoid;
+  const se=[],dae=[],wol=[],seen={},use=CUR.ua.use,avoid=CUR.ua.avoid;
+  const star=st=>Math.max(1,Math.min(3,st||1));
   STAGE.filter(c=>c.luck&&c.kind==='shinsal').forEach(c=>{const ev=SS_EVENT[c.key];if(!ev||seen['s'+c.key])return;seen['s'+c.key]=1;
-    const isDae=(c.lucksrc==='dae');const cat=(c.role==='길신'||c.role==='길')?'good':((c.role==='흉신'||c.role==='흉')?'bad':'mid');
-    const item={text:'<b>'+c.name.replace(/\s*\(.*\)/,'')+'</b> — '+ev,w:(c.str?c.str.w:2)+(isDae?0:2),st:(c.str?c.str.w:2),cat};(isDae?dae:se).push(item);});
+    const bucket=c.lucksrc==='dae'?dae:(c.lucksrc==='wol'?wol:se);const cat=(c.role==='길신'||c.role==='길')?'good':((c.role==='흉신'||c.role==='흉')?'bad':'mid');
+    const refkw=REFKEY[c.key];
+    bucket.push({name:c.name.replace(/\s*\(.*\)/,''),cat,st:star(c.str?c.str.w:2),emblem:SC.specialToken(c.key,96),short:ev,detail:charDetail(c)+(refkw?refsHtml(refkw):'')});});
   STAGE.filter(c=>c.luck&&c.kind==='spirit').forEach(c=>{const dw=GAN_WX[CUR.s.dGan],ri=REL_INFO[relKind(c.hanja,dw)];if(!ri||seen['e'+c.hanja])return;seen['e'+c.hanja]=1;
-    const isDae=!c.targets.some(t=>t.k==='se'||t.k==='wol');const cat=use.has(c.hanja)?'good':(avoid.has(c.hanja)?'bad':'mid');
-    const item={text:'<b>'+WX_KO[c.hanja]+' 기운('+ri.label.split('(')[0]+')</b>이 강해져요 — '+ri.good.split('. ')[0]+'.',w:(c.str?c.str.w:2),st:(c.str?c.str.w:2),cat};(isDae?dae:se).push(item);});
+    const inWol=c.targets.some(t=>t.k==='wol'),inSe=c.targets.some(t=>t.k==='se');const bucket=inWol?wol:(inSe?se:dae);const cat=use.has(c.hanja)?'good':(avoid.has(c.hanja)?'bad':'mid');
+    bucket.push({name:WX_KO[c.hanja]+' 기운',cat,st:star(c.str?c.str.w:2),emblem:SC.specialToken(c.key,96),short:ri.good.split('. ')[0]+'.',detail:spiritDetail(c)});});
   (CUR.rels||[]).forEach(r=>{const gi=luckGlyphInfo(r);if(!gi)return;const action=(r.type.indexOf('합')>=0)?'합':r.type;const key='r'+gi.gt+action;if(seen[key])return;seen[key]=1;
     const evs=(EVENT_BY_GUNG[gi.gt]&&EVENT_BY_GUNG[gi.gt][action])||[];const rel=RELATION_PLAIN[action]||{label:r.type};
     const cat=(action==='충'||action==='형'||action==='파')?'bad':((action==='합'&&r.el&&use.has(r.el))?'good':'mid');
-    const item={text:'<b>'+(SUBJECT_PLAIN[gi.gt]||gi.gt)+'</b> 자리가 '+rel.label+' — '+evs.slice(0,4).join(' · ')+' 같은 일이 가능해요.',w:(action==='충'?3:2),st:(action==='충'?3:((action==='합'&&r.el&&use.has(r.el))?3:2)),cat};
-    (gi.lk==='dae'?dae:se).push(item);});
+    const st=(action==='충'?3:((action==='합'&&r.el&&use.has(r.el))?3:2)),sc=cat==='good'?1:(cat==='bad'?-1:0);
+    const subj=GUNG_SHORT[gi.gt]||gi.gt,col=SUMCOL[cat][0],refkw=REFKEY[gi.ss];
+    (gi.lk==='dae'?dae:(gi.lk==='wol'?wol:se)).push({name:subj+' 자리 '+rel.label.split('(')[0],cat,st:star(st),
+      emblem:glyphEmblem(REL_EMB[action]||'변화',col),short:(SUBJECT_PLAIN[gi.gt]||gi.gt)+' 자리가 '+rel.label+' — '+evs.slice(0,3).join('·'),
+      detail:buildPlain(gi,sc)+(refkw?refsHtml(refkw):'')});});
   [['se',SELSE&&SELSE.gz,'올해'],['wol',SELWOL&&SELWOL.gz,'이달'],['dae',SELDAE&&SELDAE.gz,'이 대운']].forEach(L=>{
     if(!L[1])return;const ssg=sipsin(CUR.s.dGan,L[1][0]),info=SS_LUCK[ssg];if(!info)return;const key='l'+ssg+L[0];if(seen[key])return;seen[key]=1;
-    (L[0]==='dae'?dae:se).push({text:'<b>'+L[2]+' '+ssg+'운</b> — '+info.t,w:info.w+(L[0]==='dae'?0:2),st:info.w,cat:info.cat});});
-  se.sort((a,b)=>b.w-a.w);dae.sort((a,b)=>b.w-a.w);
-  return {se:se.slice(0,9),dae:dae.slice(0,5)};
+    const sp=SIPSIN_PLAIN[ssg]||{},col=SUMCOL[info.cat][0],bucket=L[0]==='dae'?dae:(L[0]==='wol'?wol:se);
+    bucket.push({name:L[2]+' '+ssg+'운',cat:info.cat,st:star(info.w),emblem:glyphEmblem(SIPSIN_EMB[ssg]||'운세',col),short:info.t,
+      detail:'<div class="line" style="line-height:1.75">'+info.t+'</div>'+(sp.desc?'<div class="line" style="line-height:1.75;margin-top:6px;color:#555"><b>'+(sp.label||ssg)+'</b> — '+sp.desc+'</div>':'')+(REFKEY[ssg]?refsHtml(REFKEY[ssg]):'')});});
+  const byStar=(a,b)=>b.st-a.st;dae.sort(byStar);se.sort(byStar);wol.sort(byStar);
+  return {dae:dae.slice(0,8),se:se.slice(0,10),wol:wol.slice(0,10)};
 }
-const SUM_ICON={good:'🟡',bad:'🔴',mid:'⚪'};
-function sumLine(it){const ic=SUM_ICON[it.cat||'mid'];const dots=(it.st>=3?ic+ic:ic);return '<div class="sumitem sum-'+(it.cat||'mid')+'">'+dots+' '+hlBig(it.text)+'</div>';}
+function sumCardEl(c,cls,oi){
+  const col=SUMCOL[c.cat]||SUMCOL.mid,main=cls==='main',w=main?150:104,embH=main?96:64;
+  return '<div class="pcw" data-i="'+oi+'" data-cls="'+cls+'" style="width:'+w+'px;'+(main?'':'opacity:.62;')+'">'
+    +'<div class="pcd" style="border:'+(main?'2px':'1px')+' solid '+col[0]+'">'
+    +'<div class="pchd" style="background:'+col[1]+'"><span class="pcnm" style="font-size:'+(main?12.5:11)+'px;color:'+col[2]+'">'+c.name+'</span><span class="pcst">'+sumStars(c.st)+'</span></div>'
+    +'<div class="pcemb" style="background:'+col[1]+';height:'+(main?104:74)+'px"><div style="width:'+embH+'px;height:'+embH+'px">'+c.emblem+'</div></div>'
+    +'<div class="pcft"><div class="pctype" style="color:'+col[0]+'">'+col[3]+'</div>'+(main?'<div class="pcshort">'+hlBig(c.short)+'</div>':'')+'</div></div></div>';
+}
+function renderLane(which,dir){
+  const arr=SUMCARDS[which]||[],stg=document.getElementById('sumstg-'+which),dots=document.getElementById('sumdots-'+which);if(!stg)return;
+  if(!arr.length){stg.innerHTML='<div class="sumitem sum-mid" style="font-size:12.5px">두드러진 신호가 적어요. 비교적 무난한 편입니다.</div>';if(dots)dots.innerHTML='';return;}
+  const n=arr.length,idx=((SUMIDX[which]%n)+n)%n,L=(idx-1+n)%n,R=(idx+1)%n;
+  let html='';
+  if(n>=2)html+=sumCardEl(arr[L],'side',L);
+  html+=sumCardEl(arr[idx],'main',idx);
+  if(n>=2&&R!==L)html+=sumCardEl(arr[R],'side',R);
+  stg.innerHTML=html;
+  if(dir){stg.style.animation='none';void stg.offsetWidth;stg.style.animation=(dir>0?'sumNext':'sumPrev')+' .26s ease';}
+  if(dots){let d='';for(let i=0;i<n;i++)d+='<i style="background:'+(i===idx?'#6a4ad0':'#d8d2c4')+'"></i>';dots.innerHTML=d;}
+  stg.querySelectorAll('.pcw').forEach(el=>{el.onclick=()=>{const i=+el.dataset.i;if(el.dataset.cls==='main'){openSumModal(which,i);}else{const cur=((SUMIDX[which]%n)+n)%n,dd=(i===((cur-1+n)%n))?-1:1;SUMIDX[which]=i;renderLane(which,dd);}};});
+}
+function sumNav(which,d){const n=(SUMCARDS[which]||[]).length;if(!n)return;SUMIDX[which]=((SUMIDX[which]+d)%n+n)%n;renderLane(which,d);}
+function openSumModal(which,i){const c=(SUMCARDS[which]||[])[i];if(!c)return;SUMIDX[which]=i;const col=SUMCOL[c.cat]||SUMCOL.mid;
+  document.getElementById('sumModalBox').innerHTML=
+    '<div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">'
+    +'<div style="width:78px;height:78px;flex:0 0 auto;border:2px solid '+col[0]+';border-radius:12px;background:'+col[1]+';display:flex;align-items:center;justify-content:center;overflow:hidden"><div style="width:68px;height:68px">'+c.emblem+'</div></div>'
+    +'<div><div class="modalttl" style="margin:0">'+c.name+'</div><div style="font-size:13px;color:'+col[0]+';font-weight:700;margin-top:2px">'+col[3]+' · 세기 <span style="letter-spacing:1px">'+sumStars(c.st)+'</span></div></div></div>'
+    +'<div style="font-size:13.5px;line-height:1.75">'+c.detail+'</div>'
+    +'<div class="modalbtns"><button class="ghost" onclick="closeSumModal()">닫기</button></div>';
+  document.getElementById('sumModal').classList.remove('hidden');renderLane(which);
+}
+function closeSumModal(){document.getElementById('sumModal').classList.add('hidden');}
+function laneHTML(which,label,gz,bg,tc,pc,period){
+  return '<div class="sumlane"><div class="lanehd" style="background:'+bg+'">'
+    +'<div><span class="lt" style="color:'+tc+'">'+label+'</span><span class="lg" style="color:'+tc+'">'+gz+'</span></div>'
+    +'<div class="lp" style="color:'+pc+'">'+period+'</div></div>'
+    +'<div class="carow"><button class="nav navbtn" data-w="'+which+'" data-d="-1" aria-label="이전">‹</button>'
+    +'<div class="carstg" id="sumstg-'+which+'"></div>'
+    +'<button class="nav navbtn" data-w="'+which+'" data-d="1" aria-label="다음">›</button></div>'
+    +'<div class="cardots" id="sumdots-'+which+'"></div></div>';
+}
 function renderSummary(){
   const box=document.getElementById('summaryBox');if(!box)return;
   if(!(SELDAE||SELSE||SELWOL)){box.innerHTML='<div class="infohint" style="padding:6px">대운·세운·월운을 선택하면 그 시기의 총평이 자동으로 나옵니다.</div>';return;}
-  const g=summaryItems();
+  SUMCARDS=summaryItems();SUMIDX={dae:0,se:0,wol:0};
   const when=[SELDAE?'대운 '+Math.round(SELDAE.age)+'세 무렵':'',SELSE?SELSE.Y+'년':'',SELWOL?SELWOL.label:''].filter(Boolean).join(' · ');
   let h='<div class="sumwhen">🗓️ '+when+'</div>';
-  h+='<div class="sumleg">🟡 좋은 흐름 · ⚪ 중립(쓰기 나름) · 🔴 조심할 일 &nbsp;|&nbsp; 동그라미 <b>2개=신호 강함</b>, 1개=보통 &nbsp;|&nbsp; <span class="bigev">빨간 글씨</span> = 큰 사건</div>';
-  if(SELSE||SELWOL){h+='<div class="sumgrp">◆ 이 시기'+(SELSE?'('+SELSE.Y+'년'+(SELWOL?' '+SELWOL.label:'')+')':'')+'에 특히 ──</div>';
-    h+= g.se.length? g.se.map(sumLine).join(''):'<div class="sumitem sum-mid">이 해엔 두드러진 신호가 적어요. 비교적 무난한 편입니다.</div>';}
-  if(SELDAE&&g.dae.length){h+='<div class="sumgrp">◆ 이 대운(10년, '+Math.round(SELDAE.age)+'세 무렵~) 동안의 배경 ──</div>'+g.dae.map(sumLine).join('');}
-  h+='<div class="line" style="color:var(--sub);font-size:11.5px;margin-top:6px">※ 가능성을 미리 짚어주는 참고용이에요. 위 캐릭터·관계 칩을 누르면 각 항목의 근거(십성·고전)를 자세히 볼 수 있어요.</div>';
+  h+='<div class="sumleg">⭐ 별 개수 = 신호 세기(★★★강·★★중·★약) &nbsp;|&nbsp; 카드를 누르면 자세히 · 화살표(또는 옆 카드)로 넘기기 &nbsp;|&nbsp; <span class="bigev">빨간 글씨</span> = 큰 사건</div>';
+  if(SELDAE){const startY=Math.round(CUR.s.sajuYear+SELDAE.age-1),endY=startY+9,a0=Math.round(SELDAE.age),a1=a0+9;
+    h+=laneHTML('dae','대운',SELDAE.gz,'#EEEDFE','#3C3489','#534AB7',startY+'–'+endY+'년 · 약 '+a0+'~'+a1+'세 · 10년의 큰 배경');}
+  if(SELSE)h+=laneHTML('se','세운',SELSE.gz,'#E6F1FB','#0C447C','#185FA5',SELSE.Y+'년 1년 · 올해의 흐름');
+  if(SELWOL)h+=laneHTML('wol','월운',SELWOL.gz,'#FBEAF0','#72243E','#993556',(SELWOL.year?SELWOL.year+'년 ':'')+(SELWOL.label||'')+' 무렵 · 한 달의 흐름');
+  h+='<div class="line" style="color:var(--sub);font-size:11.5px;margin-top:8px">※ 가능성을 미리 짚어주는 참고용이에요. 카드를 누르면 각 항목의 근거(십성·고전)를 자세히 볼 수 있어요.</div>';
   box.innerHTML=h;
+  box.querySelectorAll('.navbtn').forEach(b=>b.onclick=()=>sumNav(b.dataset.w,+b.dataset.d));
+  ['dae','se','wol'].forEach(w=>{if(document.getElementById('sumstg-'+w))renderLane(w);});
 }
 function applyLuckReactions(){
   clearGung();if(!CUR||!(SELDAE||SELSE||SELWOL))return;const ua=CUR.ua;
@@ -861,7 +981,7 @@ function matchEvent(sig,cat){const c=CAT_SIG[cat]||CAT_SIG['기타'];const hits=
 function btSigName(h){
   if(h.kind==='shin')return (SS_INFO[h.key]&&SS_INFO[h.key].name)||h.key;
   if(h.kind==='ss')return h.key+'운';
-  if(h.kind==='rel')return (SUBJECT_PLAIN[h.gt]||h.gt).split('·')[0].split('(')[0]+' 자리 '+h.type;
+  if(h.kind==='rel')return (GUNG_SHORT[h.gt]||h.gt)+' 자리 '+h.type;
   return '';
 }
 function btSigWhy(h,cat){
@@ -871,7 +991,7 @@ function btSigWhy(h,cat){
   if(h.kind==='ss'){const k=h.key,sp=SIPSIN_PLAIN[k]||{},ll=SS_LUCK[k];
     return (sp.label?'<b>'+sp.label+'</b> — ':'')+(sp.desc||'')+(ll?' 운으로 들어오면 '+ll.t:'');}
   if(h.kind==='rel'){const rp=RELATION_PLAIN[h.type]||{},subj=SUBJECT_PLAIN[h.gt]||h.gt;
-    return '이 시기 운이 <b>'+subj+'</b> 자리와 '+(rp.label||h.type)+'(을)를 일으켜요. '+(rp.desc||'');}
+    return '이 시기 운이 <b>'+subj+'</b> 자리와 '+(rp.label||h.type)+'(을)를 일으켜요. '+(GUNG_EXPLAIN[h.gt]?GUNG_EXPLAIN[h.gt]+' ':'')+(rp.desc||'');}
   return '';
 }
 let btN=0,BT_LAST=null;
@@ -969,6 +1089,7 @@ function readForm(){
 }
 
 let CUR=null,SELDAE=null,SELSE=null,SELWOL=null,CURSEL=null,CURREL=null,STAGE=[],WOLCACHE=[],WOLYEAR=null,SEWIN={y0:0,y1:0},DEF_SEWIN={y0:0,y1:0};
+let SUMCARDS={},SUMIDX={dae:0,se:0,wol:0};
 const LUCKKEYS=['wol','se','dae'];
 const GUNGX={year:['조상·부모궁','년주'],month:['부모·사회궁','월주'],day:['배우자궁','일주'],hour:['자녀궁','시주'],
   dae:['대운(10년 시기)','대운'],se:['세운(그 해)','세운'],wol:['월운(그 달)','월운']};
